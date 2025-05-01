@@ -1,0 +1,173 @@
+USE [MTLDB]
+GO
+/****** Object:  Schema [hotel]    Script Date: 12/24/2024 7:20:30 PM ******/
+CREATE SCHEMA [hotel]
+GO
+/****** Object:  Schema [Master]    Script Date: 12/24/2024 7:20:30 PM ******/
+CREATE SCHEMA [Master]
+GO
+/****** Object:  Table [hotel].[Payments]    Script Date: 12/24/2024 7:20:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [hotel].[Payments](
+	[PaymentId] [int] IDENTITY(1,1) NOT NULL,
+	[BookingId] [int] NOT NULL,
+	[PaymentTypeId] [int] NOT NULL,
+	[PaymentAmount] [decimal](18, 2) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+ CONSTRAINT [PK_Payments] PRIMARY KEY CLUSTERED 
+(
+	[PaymentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [hotel].[RoomBookings]    Script Date: 12/24/2024 7:20:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [hotel].[RoomBookings](
+	[BookingId] [int] IDENTITY(1,1) NOT NULL,
+	[CustomerName] [varchar](150) NOT NULL,
+	[CustomerAddress] [nvarchar](550) NOT NULL,
+	[BookingFrom] [date] NOT NULL,
+	[BookingTo] [date] NOT NULL,
+	[AssignRoomId] [int] NOT NULL,
+	[NoOfMembers] [int] NOT NULL,
+	[TotalAmount] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_RoomBookings] PRIMARY KEY CLUSTERED 
+(
+	[BookingId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [hotel].[Rooms]    Script Date: 12/24/2024 7:20:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [hotel].[Rooms](
+	[RoomId] [int] IDENTITY(1,1) NOT NULL,
+	[RoomNumber] [int] NOT NULL,
+	[RoomImage] [nvarchar](550) NOT NULL,
+	[RoomPrice] [decimal](18, 2) NOT NULL,
+	[BookingStatusId] [int] NOT NULL,
+	[RoomTypeId] [int] NOT NULL,
+	[RoomCapacity] [int] NOT NULL,
+	[RoomDescription] [nvarchar](550) NULL,
+	[IsActive] [bit] NULL,
+ CONSTRAINT [PK_Rooms] PRIMARY KEY CLUSTERED 
+(
+	[RoomId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [Master].[BookingStatus]    Script Date: 12/24/2024 7:20:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [Master].[BookingStatus](
+	[BookingStatusId] [int] IDENTITY(1,1) NOT NULL,
+	[BookingStatus] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_BookingStatus] PRIMARY KEY CLUSTERED 
+(
+	[BookingStatusId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [Master].[PaymentTypes]    Script Date: 12/24/2024 7:20:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [Master].[PaymentTypes](
+	[PaymentTypeId] [int] IDENTITY(1,1) NOT NULL,
+	[PaymentType] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_PaymentTypes] PRIMARY KEY CLUSTERED 
+(
+	[PaymentTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [Master].[RoomTypes]    Script Date: 12/24/2024 7:20:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [Master].[RoomTypes](
+	[RoomTypeId] [int] IDENTITY(1,1) NOT NULL,
+	[RoomTypeName] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_RoomTypes] PRIMARY KEY CLUSTERED 
+(
+	[RoomTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [hotel].[RoomBookings] ON 
+GO
+INSERT [hotel].[RoomBookings] ([BookingId], [CustomerName], [CustomerAddress], [BookingFrom], [BookingTo], [AssignRoomId], [NoOfMembers], [TotalAmount]) VALUES (1, N'Shayan', N'Malir karachi', CAST(N'2024-12-23' AS Date), CAST(N'2024-12-24' AS Date), 1, 2, CAST(6000.00 AS Decimal(18, 2)))
+GO
+INSERT [hotel].[RoomBookings] ([BookingId], [CustomerName], [CustomerAddress], [BookingFrom], [BookingTo], [AssignRoomId], [NoOfMembers], [TotalAmount]) VALUES (3, N'shayan', N'Lahore', CAST(N'2024-12-23' AS Date), CAST(N'2024-12-24' AS Date), 10, 2, CAST(8000.00 AS Decimal(18, 2)))
+GO
+INSERT [hotel].[RoomBookings] ([BookingId], [CustomerName], [CustomerAddress], [BookingFrom], [BookingTo], [AssignRoomId], [NoOfMembers], [TotalAmount]) VALUES (5, N'Akram', N'Shah Faisal', CAST(N'2024-12-23' AS Date), CAST(N'2024-12-24' AS Date), 10, 2, CAST(8000.00 AS Decimal(18, 2)))
+GO
+SET IDENTITY_INSERT [hotel].[RoomBookings] OFF
+GO
+SET IDENTITY_INSERT [hotel].[Rooms] ON 
+GO
+INSERT [hotel].[Rooms] ([RoomId], [RoomNumber], [RoomImage], [RoomPrice], [BookingStatusId], [RoomTypeId], [RoomCapacity], [RoomDescription], [IsActive]) VALUES (6, 1, N'3e3126f6-f54b-4fdd-9cec-9c568e3a5ae7.jpg', CAST(6000.00 AS Decimal(18, 2)), 2, 1, 2, N'Ideal for travelers seeking comfort, privacy and a premium experience.', 1)
+GO
+INSERT [hotel].[Rooms] ([RoomId], [RoomNumber], [RoomImage], [RoomPrice], [BookingStatusId], [RoomTypeId], [RoomCapacity], [RoomDescription], [IsActive]) VALUES (7, 2, N'40b3691d-7041-4d22-8b7a-2b1d23a3a56c.jpg', CAST(8000.00 AS Decimal(18, 2)), 1, 2, 4, N'A Prime Room is ideal for guests seeking a superior stay experience, combining comfort, convenience, and luxury.', 1)
+GO
+INSERT [hotel].[Rooms] ([RoomId], [RoomNumber], [RoomImage], [RoomPrice], [BookingStatusId], [RoomTypeId], [RoomCapacity], [RoomDescription], [IsActive]) VALUES (10, 2, N'', CAST(8000.00 AS Decimal(18, 2)), 3, 2, 4, N'A Prime Room is ideal for guests seeking a superior stay experience, combining comfort, convenience, and luxury.', 0)
+GO
+INSERT [hotel].[Rooms] ([RoomId], [RoomNumber], [RoomImage], [RoomPrice], [BookingStatusId], [RoomTypeId], [RoomCapacity], [RoomDescription], [IsActive]) VALUES (12, 3, N'2ec0af22-947a-413d-8171-3e17ef77cf8f.jpg', CAST(10000.00 AS Decimal(18, 2)), 1, 2, 1, N'This room is perfect for individuals prioritizing comfort, privacy, and a touch of sophistication.', 1)
+GO
+INSERT [hotel].[Rooms] ([RoomId], [RoomNumber], [RoomImage], [RoomPrice], [BookingStatusId], [RoomTypeId], [RoomCapacity], [RoomDescription], [IsActive]) VALUES (21, 3, N'', CAST(10000.00 AS Decimal(18, 2)), 3, 3, 1, N'This room is perfect for individuals prioritizing comfort, privacy, and a touch of sophistication.', 1)
+GO
+INSERT [hotel].[Rooms] ([RoomId], [RoomNumber], [RoomImage], [RoomPrice], [BookingStatusId], [RoomTypeId], [RoomCapacity], [RoomDescription], [IsActive]) VALUES (22, 4, N'4be7e47b-f48a-4581-ad7b-16fe146e0754.jpg', CAST(4000.00 AS Decimal(18, 2)), 2, 3, 3, N'This room type is ideal for budget-conscious travelers looking for a clean and comfortable place to stay.', 1)
+GO
+INSERT [hotel].[Rooms] ([RoomId], [RoomNumber], [RoomImage], [RoomPrice], [BookingStatusId], [RoomTypeId], [RoomCapacity], [RoomDescription], [IsActive]) VALUES (23, 5, N'521d37b4-4f9e-4421-8ee0-a3a19444e8ef.jpg', CAST(7000.00 AS Decimal(18, 2)), 1, 1, 4, N'Ideal for families or groups seeking comfort, style, and a home-like experience during their stay.', 1)
+GO
+INSERT [hotel].[Rooms] ([RoomId], [RoomNumber], [RoomImage], [RoomPrice], [BookingStatusId], [RoomTypeId], [RoomCapacity], [RoomDescription], [IsActive]) VALUES (24, 6, N'af70b82f-046a-496c-889c-b5e6e8c19adf.jpg', CAST(3000.00 AS Decimal(18, 2)), 2, 1, 3, N'Ideal for families or groups seeking comfort, style, and a home-like experience during their stay.', 1)
+GO
+SET IDENTITY_INSERT [hotel].[Rooms] OFF
+GO
+SET IDENTITY_INSERT [Master].[BookingStatus] ON 
+GO
+INSERT [Master].[BookingStatus] ([BookingStatusId], [BookingStatus]) VALUES (1, N'Available')
+GO
+INSERT [Master].[BookingStatus] ([BookingStatusId], [BookingStatus]) VALUES (2, N'Reserved')
+GO
+SET IDENTITY_INSERT [Master].[BookingStatus] OFF
+GO
+SET IDENTITY_INSERT [Master].[PaymentTypes] ON 
+GO
+INSERT [Master].[PaymentTypes] ([PaymentTypeId], [PaymentType]) VALUES (1, N'Cash')
+GO
+INSERT [Master].[PaymentTypes] ([PaymentTypeId], [PaymentType]) VALUES (2, N'Card Check')
+GO
+SET IDENTITY_INSERT [Master].[PaymentTypes] OFF
+GO
+SET IDENTITY_INSERT [Master].[RoomTypes] ON 
+GO
+INSERT [Master].[RoomTypes] ([RoomTypeId], [RoomTypeName]) VALUES (1, N'Sweet')
+GO
+INSERT [Master].[RoomTypes] ([RoomTypeId], [RoomTypeName]) VALUES (2, N'Prime')
+GO
+INSERT [Master].[RoomTypes] ([RoomTypeId], [RoomTypeName]) VALUES (3, N'Average')
+GO
+SET IDENTITY_INSERT [Master].[RoomTypes] OFF
+GO
+ALTER TABLE [hotel].[Payments] ADD  CONSTRAINT [DF_Payments_IsActive]  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [hotel].[Rooms] ADD  CONSTRAINT [DF_Rooms_IsActive]  DEFAULT ((1)) FOR [IsActive]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Occupied
+Available 
+Reserved
+' , @level0type=N'SCHEMA',@level0name=N'hotel', @level1type=N'TABLE',@level1name=N'Rooms', @level2type=N'COLUMN',@level2name=N'RoomTypeId'
+GO
